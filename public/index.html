@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Responsive Ecommerce Product Cards In HTML/CSS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300i,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="gallery">
+     
+    </div>
+    <script>
+      const productSection = document.querySelector('.gallery')
+      
+      const cardData = (productData) => {
+        let productCard = `
+        <div class="content">
+        <img src="${productData.image}">
+        <h3>${productData.title}</h3>
+        <p>${productData.category}</p>
+        <h6>$${productData.price}/h6>
+        <ul>
+          <li><i class="fa fa-star" aria-hidden="true"></i></li>
+          <li><i class="fa fa-star" aria-hidden="true"></i></li>
+          <li><i class="fa fa-star" aria-hidden="true"></i></li>
+          <li><i class="fa fa-star" aria-hidden="true"></i></li>
+          <li><i class="fa fa-star" aria-hidden="true"></i></li>
+        </ul>
+        <button class="buy-1">Buy Now</button>
+      </div>`
+
+      productSection.innerHTML += productCard
+      }
+
+      async function fetchData(){
+        let response = await fetch('http://127.0.0.1:8080/products')
+        let data = await response.json()
+        
+        data.map((product)=>{
+          cardData(product);
+        })
+      }
+
+      fetchData()
+    </script>
+  </body>
+</html>
